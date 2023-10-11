@@ -30,27 +30,9 @@ const userSchema = new mongoose.Schema(
             type: String,
             default: 'user',
         },
-        cart: [
-            {
-                product: {
-                    type: mongoose.Types.ObjectId,
-                    ref: 'Product',
-                },
-                quantity: Number,
-                color: String,
-            },
-        ],
+
         address: String,
-        wishlist: [
-            {
-                type: mongoose.Types.ObjectId,
-                ref: 'Product',
-            },
-        ],
-        isBlocked: {
-            type: Boolean,
-            default: false,
-        },
+
         refreshToken: {
             type: String,
         },

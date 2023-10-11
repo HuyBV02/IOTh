@@ -1,25 +1,18 @@
-import React, { useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import { Login, Public, Home } from './pages/public';
-import path from './ultils/path';
-import { getCategory } from './store/asyncAction';
-import { useDispatch } from 'react-redux';
+import './App.css';
+import Login from './pages/Login';
+import useToken from './hooks/useToken';
+import Layout from './layouts/Layout';
 
 function App() {
+    const { token, setToken } = useToken();
 
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(getCategory());
-    }, [])
+    if (!token) {
+        return <Login setToken={setToken} />;
+    }
 
     return (
-        <div className="min-h-screen font-main">
-            <Routes>
-                <Route path={path.PUBLIC} element={<Public />}>
-                    <Route path={path.HOME} element={<Home />} />
-                    <Route path={path.LOGIN} element={<Login />} />
-                </Route>
-            </Routes>
+        <div className="App">
+            <Layout setToken={setToken}/>
         </div>
     );
 }
